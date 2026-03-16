@@ -1,0 +1,45 @@
+# Deploy to GitHub Pages — publishes the frontend folder as a static site
+# Trigger: workflow_dispatch only (Lab 3 enables push triggers)
+name: Deploy to Pages
+
+on:
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    # The deployment job runs in the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      # Check out the repository so we can access the frontend folder
+      - uses: actions/checkout@v4
+
+      # Configure GitHub Pages settings
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # Upload the frontend folder as the Pages artifact
+      # This takes the contents of /frontend and packages them for deployment
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: frontend
+
+      # Deploy the uploaded artifact to GitHub Pages
+      # After this step, the site is live at https://<user>.github.io/<repo>/
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

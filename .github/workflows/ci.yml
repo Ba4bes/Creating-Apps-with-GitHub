@@ -1,0 +1,85 @@
+# CI Pipeline — runs linting and tests for all three language implementations
+# Trigger: workflow_dispatch only (Lab 3 adds push triggers)
+name: CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  # ── Node.js ──────────────────────────────────────────────
+  node:
+    name: Node.js
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: node
+    steps:
+      # Check out the repository so the workflow can access the code
+      - uses: actions/checkout@v4
+
+      # Set up Node.js — Lab 3 challenge: add a version matrix
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      # Install dependencies from package.json
+      - run: npm ci
+
+      # Lint with ESLint — catches style and potential errors
+      # Lab 3 challenge: add an ESLint config and enable this step
+      # - run: npx eslint .
+
+      # Run tests with Jest — exits clean even with zero test files
+      - run: npm test
+
+  # ── Python ───────────────────────────────────────────────
+  python:
+    name: Python
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: python
+    steps:
+      # Check out the repository
+      - uses: actions/checkout@v4
+
+      # Set up Python — Lab 3 challenge: add a version matrix
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Install dependencies from requirements.txt
+      - run: pip install -r requirements.txt
+
+      # Lint with Ruff — fast Python linter
+      # Lab 3 challenge: install ruff and enable this step
+      # - run: pip install ruff && ruff check .
+
+      # Run tests with pytest — exits clean even with zero test files
+      - run: pytest --tb=short
+
+  # ── .NET ─────────────────────────────────────────────────
+  dotnet:
+    name: .NET
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: dotnet
+    steps:
+      # Check out the repository
+      - uses: actions/checkout@v4
+
+      # Set up .NET SDK — Lab 3 challenge: add a version matrix
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      # Restore NuGet packages
+      - run: dotnet restore
+
+      # Build all projects to catch compile errors
+      - run: dotnet build --no-restore
+      - run: dotnet build Api.Tests --no-restore
+
+      # Run tests with xUnit — exits clean even with zero test files
+      - run: dotnet test Api.Tests --no-build
