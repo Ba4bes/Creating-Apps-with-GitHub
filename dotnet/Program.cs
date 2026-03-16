@@ -26,12 +26,11 @@ void WriteExperiments(List<Dictionary<string, object>> data)
 }
 
 // Serve the frontend as static files
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(
-        Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "frontend")),
-    RequestPath = ""
-});
+var frontendProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(
+    Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "frontend"));
+
+app.UseDefaultFiles(new DefaultFilesOptions { FileProvider = frontendProvider, RequestPath = "" });
+app.UseStaticFiles(new StaticFileOptions { FileProvider = frontendProvider, RequestPath = "" });
 
 // GET /entries — return all log entries
 app.MapGet("/entries", () =>

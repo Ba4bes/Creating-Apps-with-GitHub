@@ -16,7 +16,7 @@ The repo ships three backend implementations (Node, Python, .NET) so you can pic
 ## Repository Structure
 
 ```
-├── .devcontainer/          # Codespace configuration (Node 20, Python 3.12, .NET 8)
+├── .devcontainer/          # Codespace configuration (Node 22, Python 3.13, .NET 10)
 ├── .github/
 │   ├── ISSUE_TEMPLATE/     # Feature request template
 │   └── workflows/          # CI and deploy workflows (workflow_dispatch)
@@ -41,6 +41,9 @@ The repo ships three backend implementations (Node, Python, .NET) so you can pic
 
 **Node (port 3000):**
 ```bash
+
+npm install
+
 cd node && npm start
 ```
 

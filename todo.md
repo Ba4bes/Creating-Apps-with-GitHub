@@ -8,29 +8,29 @@ Organized by category, roughly in the order you should tackle them. Items that b
 
 - [V] **[BLOCKER]** Confirm your GitHub Spark license is active and Spark is accessible at the current date -- do not assume
 - [V] Check the VS Code stable release notes for agent skills support landing in stable (last confirmed: Insiders only, December 2025) -- adjust Lab 1 challenge tier accordingly
-- [ ] Verify the current Copilot free tier limits are still 2,000 completions and 50 premium requests (check docs.github.com/en/copilot/get-started/plans)
-- [ ] Confirm Copilot CLI is available to all plan tiers (confirmed GA February 2026, but verify nothing has changed)
-- [ ] Check that the 30-day Copilot Pro trial is still offered and find the exact signup URL for the repo README
-- [ ] Verify the `github/awesome-copilot` community collection is still the correct reference URL
-- [ ] Confirm agent mode in VS Code stable is available on the free tier
-- [ ] Check the GitHub Codespaces free tier limits for attendees on free GitHub accounts (monthly included hours)
+- [V] Verify the current Copilot free tier limits are still 2,000 completions and 50 premium requests (check docs.github.com/en/copilot/get-started/plans)
+- [V] Confirm Copilot CLI is available to all plan tiers (confirmed GA February 2026, but verify nothing has changed)
+- [V] Check that the 30-day Copilot Pro trial is still offered and find the exact signup URL for the repo README
+- [V] Verify the `github/awesome-copilot` community collection is still the correct reference URL
+- [V] Confirm agent mode in VS Code stable is available on the free tier
+- [V] Check the GitHub Codespaces free tier limits for attendees on free GitHub accounts (monthly included hours)
 
 ---
 
 ## 2. Azure (even though attendees deploy to Pages, you demo Azure)
 
-- [ ] **[BLOCKER]** Pull up the current Azure docs for GitHub Actions OIDC authentication and document exactly where the errors are -- capture screenshots dated to your prep day so you have a concrete teaching moment even if Microsoft fixes them before the workshop
-- [ ] Set up a personal Azure subscription or demo environment for the OIDC demo
-- [ ] Configure OIDC federation between your demo repo and that Azure subscription (follow the correct steps, not the docs)
-- [ ] Test the `azure/login` action with OIDC end-to-end at least twice before the day
-- [ ] Write down the correct subject claim format for branch-based deployment as a reference card for the session
-- [ ] Decide what Azure resource type you are showing (Container Apps, App Service, or Static Web Apps) and have it pre-provisioned
+- [v] **[BLOCKER]** Pull up the current Azure docs for GitHub Actions OIDC authentication and document exactly where the errors are -- capture screenshots dated to your prep day so you have a concrete teaching moment even if Microsoft fixes them before the workshop
+- [v] Set up a personal Azure subscription or demo environment for the OIDC demo
+- [v] Configure OIDC federation between your demo repo and that Azure subscription (follow the correct steps, not the docs)
+- [v] Test the `azure/login` action with OIDC end-to-end at least twice before the day
+- [v] Write down the correct subject claim format for branch-based deployment as a reference card for the session
+- [v] Decide what Azure resource type you are showing (Container Apps, App Service, or Static Web Apps) and have it pre-provisioned
 
 ---
 
 ## 3. Build the workshop repo
 
-- [ ] **[BLOCKER]** Create the repo with the three language folders (node/, python/, dotnet/) and shared frontend
+- [V] **[BLOCKER]** Create the repo with the three language folders (node/, python/, dotnet/) and shared frontend
 - [ ] **[BLOCKER]** Define the app concept specifically enough to build the starter -- the "Hype vs. Reality Tracker" concept from earlier sessions is the candidate; confirm it or replace it
 - [ ] Implement a working baseline in all three language folders (the thing attendees run in Lab 0)
 - [ ] Implement the feature that attendees will add in Lab 2 (you need the answer to write the guided lab instructions)
