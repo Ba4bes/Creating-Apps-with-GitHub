@@ -1,5 +1,6 @@
-// API base URL — change this if you are using Python (5000) or .NET (5001)
-const API_BASE = "http://localhost:3000";
+// API base URL — uses the same origin since all backends serve the frontend as static files.
+// If the frontend is opened as a standalone file, override this to the correct backend URL.
+const API_BASE = "";
 
 // ── Navigation ──────────────────────────────────────────────
 
