@@ -1,21 +1,29 @@
-# Lab 0 — Challenge Self-Directed: Customize Your Codespace
+# Lab 0 — Challenge Self-Directed: Customize Your Dev Container
 
-**Goal:** Extend the devcontainer with a tool or extension you use, and understand the multi-language repo architecture.
+**Goal:** Extend `.devcontainer/devcontainer.json` with a VS Code extension, a CLI tool, and a VS Code setting.
 
 **Time:** 25 minutes
 
-**You will need:** Lab 0 Core completed (Codespace running with the app visible).
+**You will need:** Lab 0 Core completed (you have a Codespace running).
+
+> if you are stuck, open the guided lab [here](../lab-0-codespaces/4-challenge-guided.md) for step-by-step instructions.   
 
 ---
 
 ## Your Task
 
-Modify `.devcontainer/devcontainer.json` to add a tool or extension you actually use in your daily work. Rebuild the container and verify it works.
+Open a new Codespace.
 
-Then explore the repo structure and understand the relationship between the three language folders and the shared frontend/data layer.
+Modify `.devcontainer/devcontainer.json` to add:
+
+1. The GitHub Copilot VS Code extension (`github.copilot`)
+2. The Azure CLI as a dev container feature
+3. A VS Code setting that hides the minimap
+
+Rebuild the container on every step and verify all three changes are applied.
 
 ## Success Criteria
 
-- The devcontainer has at least one new extension or tool
-- The container rebuilds successfully with the change
-- You can explain which files are shared across all three language implementations and which are language-specific
+- The GitHub Copilot extension is installed and visible in the Extensions sidebar
+- Running `az --version` in the terminal succeeds
+- The minimap is no longer visible on the right side of the editor

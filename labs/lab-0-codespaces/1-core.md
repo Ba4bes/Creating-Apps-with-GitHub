@@ -1,22 +1,33 @@
-# Lab 0 — Core Self-Directed: Launch Your Codespace
+# Lab 0 — Core Self-Directed: Work with a Codespace
 
-**Goal:** Get the workshop app running in a browser tab using GitHub Codespaces.
+**Goal:** Start a Codespace, make and commit a change, delete the Codespace, then create a new one and verify that your committed change persisted.
 
-**Time:** 30 minutes
+**Time:** 20 minutes
 
 **You will need:** A GitHub account with Codespaces access.
 
+> if you are stuck, open the guided lab [here](../lab-0-codespaces/2-core-guided.md) for step-by-step instructions.
 ---
 
 ## Your Task
 
-Fork the workshop repo and launch it in a Codespace. Use the `.devcontainer` folder and the repo README as your references. Start the API in your chosen language folder and open the frontend in a browser.
+- Fork the workshop repo and launch it in a Codespace. 
+- Start the app and confirm it is running. Use the browser link in the notification or the forwarded port in the Ports tab to open it.
+- Look around the app.
+- Add your name to the top of `README.md`. 
+- Commit and push it from within the Codespace, verify it is updated in the webinterface of the repo
+- Stop the Codespace from the web interface
+ 
+> Note: you don't need to stop the codespace before deleting it. This exersize is just to prove tpoint that you can stop and restart a codespace without losing your work. If you want to see the difference, make a change in your codespace, stop it and then start it again. You'll see that your change is still there. If you had deleted the codespace instead, that change would be lost.
+
+- Delete the Codespace
+
 
 ## Success Criteria
 
-- The app is running in a browser tab
-- The Log view shows two pre-populated experiment entries
-- The Dashboard view shows a "Summary not yet available" message
-- The Add Entry form is visible and functional
+- A Codespace was created and the app was visible in the browser
+- A change was committed and pushed from within the Codespace
+- The Codespace was stopped and deleted
 
-> **Fallback:** If Codespaces is unavailable, clone the repo locally and run the app from your machine.
+
+> **Tip:** Uncommitted changes are lost when a Codespace is deleted. Committed and pushed changes are saved to the branch and will be there the next time you create a Codespace.
