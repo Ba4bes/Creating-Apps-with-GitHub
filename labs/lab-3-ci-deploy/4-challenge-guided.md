@@ -1,53 +1,107 @@
-# Lab 3 — Challenge Guided: Multi-Version Matrix and Intentional Failure
+# Lab 3 — Challenge Guided: More Jobs, Linting, Dependencies, and Breaking CI
 
-**Goal:** Expand the CI matrix to test multiple versions, add a lint step, and verify CI catches a deliberate bug.
+**Goal:** Add CI jobs for the other languages, enable linting, add a summary job that depends on all language jobs, and demonstrate that CI catches deliberate errors.
 
-**Time:** 25 minutes
+**Time:** 15 minutes
 
-**You will need:** Lab 3 Core completed (CI green, Pages deployed).
+**You will need:** Lab 3 Core completed (CI green on your PR).
 
 ---
 
 ## Steps
 
-### Part A: Multi-Version Matrix
+### Part A: Add Jobs for the Remaining Languages
 
 1. Open `.github/workflows/ci.yml`
-2. For your chosen language, add a version matrix. For example, for Node:
+2. You already have one job from the core lab. Add jobs for the other two languages following the same pattern. The steps are listed in `ci.yml` — wrap them in the same `runs-on`, `defaults` with `working-directory`, and `steps` structure you used for your first job.
+
+   For reference, here are all three jobs together:
    ```yaml
-   node:
-     name: Node.js
-     runs-on: ubuntu-latest
-     strategy:
-       matrix:
-         node-version: [18, 20, 22]
-     defaults:
-       run:
-         working-directory: node
-     steps:
-       - uses: actions/checkout@v4
-       - uses: actions/setup-node@v4
-         with:
-           node-version: ${{ matrix.node-version }}
-       - run: npm ci
-       - run: npm test
+   jobs:
+     node:
+       name: Node.js
+       runs-on: ubuntu-latest
+       defaults:
+         run:
+           working-directory: node
+       steps:
+         - uses: actions/checkout@v4
+         - uses: actions/setup-node@v4
+           with:
+             node-version: "20"
+         - run: npm ci
+         - run: npm test
+
+     python:
+       name: Python
+       runs-on: ubuntu-latest
+       defaults:
+         run:
+           working-directory: python
+       steps:
+         - uses: actions/checkout@v4
+         - uses: actions/setup-python@v5
+           with:
+             python-version: "3.12"
+         - run: pip install -r requirements.txt
+         - run: pytest --tb=short
+
+     dotnet:
+       name: .NET
+       runs-on: ubuntu-latest
+       defaults:
+         run:
+           working-directory: dotnet
+       steps:
+         - uses: actions/checkout@v4
+         - uses: actions/setup-dotnet@v4
+           with:
+             dotnet-version: "8.0.x"
+         - run: dotnet restore
+         - run: dotnet build --no-restore
+         - run: dotnet build Api.Tests --no-restore
+         - run: dotnet test Api.Tests --no-build
    ```
-3. Commit and push. Watch the matrix expand in the Actions tab.
+3. Commit and push. Verify all three jobs run in the Actions UI.
 
 ### Part B: Add a Lint Step
 
-4. Uncomment or add the lint step for your language:
+1. Open `.github/workflows/ci.yml`
+2. Uncomment or add the lint step for your language:
    - **Node:** `npx eslint .` (you may need to add an `.eslintrc.json` config)
    - **Python:** `pip install ruff && ruff check .`
    - **.NET:** Build warnings are checked during `dotnet build`
-5. Fix any lint errors and push again
+3. Fix any lint errors and push again
 
-### Part C: Intentional Bug
+### Part C: Add a Summary Job with Dependencies
 
-6. Introduce a deliberate syntax error in your API file (e.g., remove a closing bracket)
-7. Commit and push to a new branch
-8. Open a PR and verify that CI catches the error and the check fails
-9. Fix the bug, push again, verify CI goes green
-10. **Do not merge this PR** — its purpose is to demonstrate that CI protects main
+4. Add a new job at the bottom of `ci.yml` that only runs when all three language jobs succeed:
+   ```yaml
+     ci-passed:
+       name: CI Passed
+       runs-on: ubuntu-latest
+       needs: [node, python, dotnet]
+       steps:
+         - run: echo "All CI checks passed"
+   ```
+   > **What does `needs` do?** It creates a dependency — `ci-passed` will only run after `node`, `python`, and `dotnet` all complete successfully. If any of them fails, this job is skipped. This is useful for requiring a single status check on PRs instead of checking each language individually.
+5. Commit and push. In the Actions UI, notice how the `ci-passed` job appears after the three language jobs and only runs once they all succeed.
 
-**Expected output:** CI runs across multiple versions, lint is active, and you have demonstrated that CI catches bugs before they reach main.
+### Part D: Intentional Bug
+
+6. Create a new branch for this experiment:
+    ```bash
+    git checkout -b break-ci
+    ```
+7. Introduce a deliberate syntax error in your API file (e.g., remove a closing bracket)
+8. Commit and push to the branch:
+    ```bash
+    git add -A
+    git commit -m "Introduce deliberate bug"
+    git push origin break-ci
+    ```
+9. Open a PR from `break-ci` into `main` and verify that CI catches the error — the check should fail
+10. Fix the bug, push again, verify CI goes green
+11. **Close this PR without merging** — its purpose is to demonstrate that CI protects main
+
+**Expected output:** Lint is active, a summary job depends on all language jobs via `needs`, and you have demonstrated that CI catches bugs before they reach main.

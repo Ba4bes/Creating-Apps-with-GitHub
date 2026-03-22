@@ -1,85 +1,55 @@
-# CI Pipeline — runs linting and tests for all three language implementations
-# Trigger: workflow_dispatch only (Lab 3 adds push triggers)
-name: CI
+# CI Pipeline — runs tests for all three language implementations
+#
+# Lab 3: Add the workflow structure
+# The steps for each job are already written. Your task is to add the
+# structural YAML that makes this a working workflow:
+#
+#   - name          — give the workflow a display name
+#   - on            — add triggers so it runs on push to main and on pull_request
+#   - jobs          — wrap each group of steps in a proper job with:
+#       - runs-on   — which runner to use (ubuntu-latest)
+#       - defaults  — set working-directory so run steps execute in the right folder
+#       - steps     — the steps are already listed below, ready to use
+#
+# See the Lab 3 instructions for details.
 
+# Lab 3: Add a workflow name here
+
+# Lab 3: Add triggers — right now only manual trigger is set
 on:
   workflow_dispatch:
 
-jobs:
-  # ── Node.js ──────────────────────────────────────────────
-  node:
-    name: Node.js
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: node
-    steps:
-      # Check out the repository so the workflow can access the code
-      - uses: actions/checkout@v4
+# Lab 3: Define jobs — each group of steps below needs to be wrapped
+# in a proper job with runs-on, defaults (working-directory), and steps.
+# The steps themselves are ready to go — you just need the structure around them.
 
-      # Set up Node.js — Lab 3 challenge: add a version matrix
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "20"
+# ── Node.js steps (should run in the node/ directory) ──
+#      - uses: actions/checkout@v4
+#      - uses: actions/setup-node@v4
+#        with:
+#          node-version: "20"
+#      - run: npm ci
+#      - run: npm test
 
-      # Install dependencies from package.json
-      - run: npm ci
+# ── Python steps (should run in the python/ directory) ──
+#      - uses: actions/checkout@v4
+#      - uses: actions/setup-python@v5
+#        with:
+#          python-version: "3.12"
+#      - run: pip install -r requirements.txt
+#      - run: pytest --tb=short
 
-      # Lint with ESLint — catches style and potential errors
-      # Lab 3 challenge: add an ESLint config and enable this step
-      # - run: npx eslint .
+# ── .NET steps (should run in the dotnet/ directory) ──
+#      - uses: actions/checkout@v4
+#      - uses: actions/setup-dotnet@v4
+#        with:
+#          dotnet-version: "8.0.x"
+#      - run: dotnet restore
+#      - run: dotnet build --no-restore
+#      - run: dotnet build Api.Tests --no-restore
+#      - run: dotnet test Api.Tests --no-build
 
-      # Run tests with Jest — exits clean even with zero test files
-      - run: npm test
-
-  # ── Python ───────────────────────────────────────────────
-  python:
-    name: Python
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: python
-    steps:
-      # Check out the repository
-      - uses: actions/checkout@v4
-
-      # Set up Python — Lab 3 challenge: add a version matrix
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      # Install dependencies from requirements.txt
-      - run: pip install -r requirements.txt
-
-      # Lint with Ruff — fast Python linter
-      # Lab 3 challenge: install ruff and enable this step
-      # - run: pip install ruff && ruff check .
-
-      # Run tests with pytest — exits clean even with zero test files
-      - run: pytest --tb=short
-
-  # ── .NET ─────────────────────────────────────────────────
-  dotnet:
-    name: .NET
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: dotnet
-    steps:
-      # Check out the repository
-      - uses: actions/checkout@v4
-
-      # Set up .NET SDK — Lab 3 challenge: add a version matrix
-      - uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: "8.0.x"
-
-      # Restore NuGet packages
-      - run: dotnet restore
-
-      # Build all projects to catch compile errors
-      - run: dotnet build --no-restore
-      - run: dotnet build Api.Tests --no-restore
-
-      # Run tests with xUnit — exits clean even with zero test files
-      - run: dotnet test Api.Tests --no-build
+# Lint steps (Lab 3 challenge — add these to your jobs):
+#   Node.js: npx eslint .
+#   Python:  pip install ruff && ruff check .
+#   .NET:    build warnings are checked during dotnet build

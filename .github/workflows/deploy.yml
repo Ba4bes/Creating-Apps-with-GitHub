@@ -24,22 +24,13 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      # Check out the repository so we can access the frontend folder
-      - uses: actions/checkout@v4
-
-      # Configure GitHub Pages settings
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      # Upload the frontend folder as the Pages artifact
-      # This takes the contents of /frontend and packages them for deployment
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: frontend
-
-      # Deploy the uploaded artifact to GitHub Pages
-      # After this step, the site is live at https://<user>.github.io/<repo>/
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      # Lab 3: Add the deployment steps here
+      # You need to:
+      # 1. Check out the repository
+      # 2. Configure GitHub Pages
+      # 3. Upload the frontend folder as a Pages artifact
+      # 4. Deploy the artifact to GitHub Pages
+      #
+      # Hint: look at the actions/checkout, actions/configure-pages,
+      #       actions/upload-pages-artifact, and actions/deploy-pages actions
+      - run: echo "Replace this step with the real deployment steps"

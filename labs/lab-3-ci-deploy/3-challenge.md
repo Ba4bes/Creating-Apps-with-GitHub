@@ -1,20 +1,22 @@
-# Lab 3 — Challenge Self-Directed: Advanced CI Configuration
+# Lab 3 — Challenge Self-Directed: More Jobs, Linting, Dependencies, and Breaking CI
 
-**Goal:** Expand CI with multi-version testing, linting, and demonstrate that CI catches deliberate errors.
+**Goal:** Add CI jobs for the other languages, enable linting, add a summary job that depends on all language jobs, and demonstrate that CI catches deliberate errors.
 
-**Time:** 25 minutes
+**Time:** 15 minutes
 
-**You will need:** Lab 3 Core completed (CI green, Pages deployed).
+**You will need:** Lab 3 Core completed (CI green on your PR).
 
 ---
 
 ## Your Task
 
-Add a version matrix to your language's CI job so it tests across multiple runtime versions. Enable the lint step. Then introduce a deliberate bug, push it on a branch, and verify CI catches it before it reaches main.
+1. **Enable linting**. Uncomment or add the lint step for your language in `ci.yml`. Fix any lint errors that come up.
+2. **Break CI on purpose**. Introduce a deliberate syntax error in your API file (e.g., remove a closing bracket), push it to a new branch, open a PR, and verify CI catches the error. Fix it and get back to green.
 
 ## Success Criteria
 
-- CI matrix runs at least 2 versions of your chosen language
-- A lint step runs as part of CI
+- CI jobs exist for all three languages, each following the same structure
+- A lint step runs as part of CI for your chosen language
+- A `ci-passed` summary job depends on the three language jobs using `needs`
 - You have a PR where CI correctly failed on a deliberate bug
-- Main remains green and deployed
+- After fixing, CI is green again
