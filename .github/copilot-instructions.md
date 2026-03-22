@@ -1,1 +1,0 @@
-End every message with an encouraging message.
