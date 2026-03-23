@@ -11,7 +11,7 @@
 
 ## Your Task
 
-- Fork the workshop repo and launch it in a Codespace. 
+- Create a new repository out of the workshop repo ([github.com/Ba4bes/Creating-Apps-with-GitHub](https://github.com/Ba4bes/Creating-Apps-with-GitHub/)) by using the template and launch it in a Codespace. 
 - Start the app and confirm it is running. Use the browser link in the notification or the forwarded port in the Ports tab to open it.
 - Look around the app.
 - Add your name to the top of `README.md`. 

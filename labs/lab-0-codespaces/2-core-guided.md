@@ -12,7 +12,7 @@
 
 ### 1. Create your repo and start a Codespace
 
-1. Open the workshop repo in your browser
+1. Open the workshop repo in your browser: [github.com/Ba4bes/Creating-Apps-with-GitHub](https://github.com/Ba4bes/Creating-Apps-with-GitHub/)
 2. Click **Use this template** → **Create a new repository**, fill in a repository name, and click **Create repository**
 3. In your new repository, click the green **Code** button → **Codespaces** tab → **Create codespace on main**
 
@@ -60,7 +60,7 @@
 15. Click the green **Code** button → **Codespaces** tab
 16. Click the **...** menu next to your running Codespace and select **Stop codespace**
 
-> Note: you don't need to stop the codespace before deleting it. This exersize is just to prove tpoint that you can stop and restart a codespace without losing your work. If you want to see the difference, make a change in your codespace, stop it and then start it again. You'll see that your change is still there. If you had deleted the codespace instead, that change would be lost.
+> Note: you don't need to stop the codespace before deleting it. This exercise is just to prove the point that you can stop and restart a codespace without losing your work. If you want to see the difference, make a change in your codespace, stop it and then start it again. You'll see that your change is still there. If you had deleted the codespace instead, that change would be lost.
 > 
 17. Once it has stopped, click the **...** menu again and select **Delete**
 
