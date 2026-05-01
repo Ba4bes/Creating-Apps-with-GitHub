@@ -49,7 +49,7 @@ In Lab 3 you learned workflow structure — the CI steps were given and you wrap
 
 Now swap your basic `run` step for purpose-built actions from the GitHub Marketplace. These are actions that other developers (including GitHub themselves) have built and published.
 
-10. Replace the `ls` step with the three Marketplace actions needed for Pages deployment:
+10. Replace the `ls` step with the three Marketplace actions needed for Pages deployment. The frontend reads `data/experiments.json` as a static fallback when no API is reachable, so we also need to stage that file alongside the frontend before uploading:
     ```yaml
         steps:
           # Check out the repository
@@ -58,6 +58,10 @@ Now swap your basic `run` step for purpose-built actions from the GitHub Marketp
           # Configure GitHub Pages settings
           - name: Setup Pages
             uses: actions/configure-pages@v5
+
+          # Stage the data file next to the frontend so the deployed page can fetch it
+          - name: Stage site
+            run: cp data/experiments.json frontend/
 
           # Upload the frontend folder as the Pages artifact
           - name: Upload artifact

@@ -13,10 +13,10 @@ Pick your mode at the start of each lab. You can switch at any time. Both modes 
 
 | Lab | Topic | Time | Folder |
 |-----|-------|------|--------|
-| Lab 0 | Codespaces — fork, launch, run | 55 min | [lab-0-codespaces](lab-0-codespaces/) |
-| Lab 1 | Copilot Config — instructions & prompt files | 55 min | [lab-1-copilot-config](lab-1-copilot-config/) |
+| Lab 0 | Codespaces — template, launch, customize devcontainer | 45 min | [lab-0-codespaces](lab-0-codespaces/) |
+| Lab 1 | Copilot Config — instructions, skills & plugins | 60 min | [lab-1-copilot-config](lab-1-copilot-config/) |
 | Lab 2 | Feature — implement the summary endpoint (core sprint) | 30 min | [lab-2-summary-endpoint](lab-2-summary-endpoint/) |
-| Lab 3 | CI — workflow structure & triggers | 60 min | [lab-3-ci-deploy](lab-3-ci-deploy/) |
+| Lab 3 | CI — workflow structure & triggers | 45 min | [lab-3-ci-deploy](lab-3-ci-deploy/) |
 | Lab 4 | Deploy — GitHub Pages & Marketplace actions | 45 min | [lab-4-deploy](lab-4-deploy/) |
 
 ## Format

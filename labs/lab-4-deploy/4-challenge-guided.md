@@ -33,6 +33,7 @@ The simplest approach is to add a `needs` dependency in your deploy workflow so 
        steps:
          - uses: actions/checkout@v4
          - uses: actions/configure-pages@v5
+         - run: cp data/experiments.json frontend/
          - uses: actions/upload-pages-artifact@v4
            with:
              path: frontend
@@ -42,7 +43,8 @@ The simplest approach is to add a `needs` dependency in your deploy workflow so 
    > **What does this achieve?** The deploy job only runs when all three CI jobs pass *and* the push is to main. On PRs, only CI runs. On merge to main, CI runs first, then deploy.
 
 3. You'll also need to add `pages: write` and `id-token: write` to the top-level permissions in `ci.yml`, or use the job-level permissions shown above.
-4. Commit and push. Verify that on merge to main, CI runs first and deploy follows.
+4. **Delete `.github/workflows/deploy.yml`.** Now that `ci.yml` owns the deploy job, leaving the standalone `deploy.yml` in place would cause two workflows to race for the same `github-pages` environment on every push to main. `git rm .github/workflows/deploy.yml`, commit, and push.
+5. Verify that on merge to main, CI runs first and deploy follows — and that only the `CI` workflow appears under Actions for that run.
 
 > **Alternative approach:** If you prefer to keep CI and deploy as separate workflow files, you can use the `workflow_run` trigger in `deploy.yml`:
 > ```yaml

@@ -110,7 +110,7 @@ Now wrap the steps for your chosen language in a proper job definition. The step
          - uses: actions/checkout@v4
          - uses: actions/setup-dotnet@v4
            with:
-             dotnet-version: "8.0.x"
+             dotnet-version: "10.x"
          - run: dotnet restore
          - run: dotnet build --no-restore
          - run: dotnet build Api.Tests --no-restore
