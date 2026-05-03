@@ -15,7 +15,8 @@ In Lab 3 you learned how workflow structure works — `name`, `on`, `jobs`, `run
 Your job:
 
 1. **Configure GitHub Pages.** Set the Pages source to GitHub Actions in your repo settings
-2. **Insert the Marketplace actions.** Make use of the following actions: `actions/configure-pages`, `actions/upload-pages-artifact`, and `actions/deploy-pages`. 
+2. **Insert the Marketplace actions.** Make use of the following actions: `actions/configure-pages`, `actions/upload-pages-artifact`, and `actions/deploy-pages`.
+3. **Stage the data file.** The frontend's static fallback fetches `experiments.json` from the same folder it was served from — add a `run:` step that copies `data/experiments.json` into `frontend/` before the upload step.
 3. **Add a push trigger** so the workflow runs automatically when code is pushed to main
 4. **Merge the PR.** This triggers the deploy workflow. CI (Lab 3) validated the code, deploy (Lab 4) ships it.
 5. **Verify your live URL.** Find it in Settings → Pages and visit it. 

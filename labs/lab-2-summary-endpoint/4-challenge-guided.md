@@ -41,7 +41,7 @@
 
 6. Run the tests:
 
-   > **Note:** For Node and .NET, the API server must be running in a separate terminal before you run the tests. Start it with `npm start` (Node) or `dotnet run` (.NET). Python tests use Flask's built-in test client and do not need a running server.
+   > **Note:** All three test stacks use in-process clients (Node uses `supertest`, Python uses Flask's `test_client`, .NET uses `WebApplicationFactory`), so you do **not** need a running API server in another terminal — the test runner spins the app up itself.
 
    ```bash
    # Node

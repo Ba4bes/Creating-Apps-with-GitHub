@@ -1,8 +1,6 @@
-Lab Student
-
 # Creating Apps with GitHub — AI Experiment Log
 
-A hands-on workshop where you fork this repo, open a Codespace, and across four labs: configure Copilot, implement a feature, and deploy to GitHub Pages. By the end of the day you have a live personal dashboard showing your AI experiment results.
+A hands-on workshop where you create a repo from this template, open a Codespace, and across five labs: set up your dev environment, configure Copilot, implement a feature, build a CI workflow, and deploy to GitHub Pages. By the end of the day you have a live personal dashboard showing your AI experiment results.
 
 ## What You Build
 
@@ -18,26 +16,27 @@ The repo ships three backend implementations (Node, Python, .NET) so you can pic
 ## Repository Structure
 
 ```
-├── .devcontainer/          # Codespace configuration (Node 22, Python 3.13, .NET 10)
+├── .devcontainer/          # Minimal Codespace base — you add your language in Lab 0
 ├── .github/
 │   ├── ISSUE_TEMPLATE/     # Feature request template
-│   └── workflows/          # CI and deploy workflows (workflow_dispatch)
+│   └── workflows/          # CI and deploy workflows (manual-only until Labs 3–4)
 ├── data/
 │   └── experiments.json    # Shared data file (2 starter entries)
-├── frontend/               # SPA (HTML + JS + CSS, Chart.js)
+├── frontend/               # SPA (HTML + JS + CSS, Chart.js from CDN)
 ├── node/                   # Express API on port 3000
 ├── python/                 # Flask API on port 5000
 ├── dotnet/                 # ASP.NET Core API on port 5001
-└── labs/                   # Lab instructions (0–3)
+├── rescue/                 # Completed Lab 2 files for the time-boxed sprint
+└── labs/                   # Lab instructions (0–4)
 ```
 
 ## Quick Start
 
-### 1. Fork & Open in Codespaces
+### 1. Create Your Repo & Open in Codespaces
 
-1. Click **Fork** at the top of this repo
-2. In your fork, click **Code → Codespaces → Create codespace on main**
-3. Wait for the container to build (installs all three language dependencies)
+1. Click **Use this template → Create a new repository** at the top of this repo
+2. In your new repo, click **Code → Codespaces → Create codespace on main**
+3. The container starts with a minimal base image — Lab 0 walks you through adding your chosen language
 
 ### 2. Run Your Chosen Language
 
@@ -71,9 +70,7 @@ dotnet run
 
 ### 3. Open the Frontend
 
-Once the API is running, click the globe icon next to the forwarded port in the **Ports** tab. You should see the app with two starter entries and a "Summary not yet available" message on the dashboard.
-
-> **Note:** The frontend defaults to `http://localhost:3000`. If you are using Python or .NET, update the `API_BASE` variable in `frontend/app.js` to match your port.
+Each backend serves the frontend itself on its own port. Click the globe icon next to the forwarded port in the **Ports** tab. You should see the app with two starter entries and a placeholder on the Tool Comparison chart (you wire that up in Lab 2).
 
 ## Copilot Free Tier
 
@@ -85,17 +82,17 @@ Want unlimited chat for today? GitHub offers a [30-day free Copilot Pro trial](h
 
 | Lab                                   | Topic                                                  | Time   |
 | ------------------------------------- | ------------------------------------------------------ | ------ |
-| [Lab 0](labs/lab-0-codespaces/)       | Codespaces — fork, launch, run                         | 55 min |
-| [Lab 1](labs/lab-1-copilot-config/)   | Copilot config — instructions & prompt files           | 55 min |
+| [Lab 0](labs/lab-0-codespaces/)       | Codespaces — template, launch, customize devcontainer  | 45 min |
+| [Lab 1](labs/lab-1-copilot-config/)   | Copilot config — instructions, skills & plugins        | 60 min |
 | [Lab 2](labs/lab-2-summary-endpoint/) | Feature — implement the summary endpoint (core sprint) | 30 min |
-| [Lab 3](labs/lab-3-ci-deploy/)        | CI — workflow structure & triggers                     | 60 min |
+| [Lab 3](labs/lab-3-ci-deploy/)        | CI — workflow structure, triggers & jobs               | 45 min |
 | [Lab 4](labs/lab-4-deploy/)           | Deploy — GitHub Pages & Marketplace actions            | 45 min |
 
 Each lab has **Core** (everyone completes) and **Challenge** (stretch goal) tiers, each available in **Guided** (step-by-step) or **Self-directed** (goal only) mode.
 
 ## Test Frameworks
 
-Test frameworks are pre-installed but no test files exist yet — writing your first test is a Lab 2 challenge.
+A single shape test is provided per language; writing more tests is a Lab 2 challenge.
 
 ```bash
 # Node (Jest)

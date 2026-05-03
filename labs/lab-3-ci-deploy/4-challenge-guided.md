@@ -57,7 +57,7 @@
          - uses: actions/checkout@v4
          - uses: actions/setup-dotnet@v4
            with:
-             dotnet-version: "8.0.x"
+             dotnet-version: "10.x"
          - run: dotnet restore
          - run: dotnet build --no-restore
          - run: dotnet build Api.Tests --no-restore
@@ -70,20 +70,7 @@
 
 1. Open `.github/workflows/ci.yml`
 2. Uncomment or add the lint step for your language:
-   - **Node:** `npx eslint .` — you will also need to create `node/.eslintrc.json` with this content:
-     ```json
-     {
-       "env": {
-         "node": true,
-         "es2021": true,
-         "jest": true
-       },
-       "extends": "eslint:recommended",
-       "parserOptions": {
-         "ecmaVersion": "latest"
-       }
-     }
-     ```
+   - **Node:** `npx eslint .` — the repo already ships a flat-config file at `node/eslint.config.js` (ESLint 9, with `node` and `jest` globals enabled), so no extra config is needed.
    - **Python:** `pip install ruff && ruff check .`
    - **.NET:** Build warnings are checked during `dotnet build`
 3. Fix any lint errors and push again
