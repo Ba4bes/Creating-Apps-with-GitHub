@@ -73,27 +73,32 @@ The Codespace starts with a minimal base image — no language runtimes are inst
 
    **Python:**
    ```json
-   {
-     "name": "Creating Apps with GitHub",
-     "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
-     "features": {
-       "ghcr.io/devcontainers/features/python:1": {}
-     },
-     "customizations": {
-       "vscode": {
-         "extensions": [
-           "GitHub.copilot",
-           "GitHub.copilot-chat",
-           "ms-python.python"
-         ],
-         "settings": {
-           "editor.formatOnSave": true
-         }
-       }
-     },
-     "forwardPorts": [5000],
-     "postCreateCommand": "cd python && pip install -r requirements.txt"
-   }
+  {
+    "name": "Creating Apps with GitHub",
+    "image": "mcr.microsoft.com/devcontainers/python:3-3.14-trixie",
+    "features": {
+      "ghcr.io/devcontainers/features/python:1": {}
+    },
+    "customizations": {
+      "vscode": {
+        "extensions": [
+          "GitHub.copilot",
+          "GitHub.copilot-chat",
+          "ms-python.python"
+        ],
+        "settings": {
+          "editor.formatOnSave": true
+        }
+      }
+    },
+    "forwardPorts": [
+      5000
+    ],
+    "remoteEnv": {
+      "PATH": "${containerEnv:PATH}:/home/vscode/.local/bin"
+    },
+    "postCreateCommand": "cd python && pip install -r requirements.txt"
+  }
    ```
 
    **.NET:**
