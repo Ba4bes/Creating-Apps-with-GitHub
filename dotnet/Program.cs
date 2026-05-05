@@ -96,35 +96,24 @@ app.MapGet("/summary", () =>
     var byVerdict = new Dictionary<string, int>();
     foreach (var v in verdicts) byVerdict[v] = 0;
 
-    var byTool = new Dictionary<string, Dictionary<string, int>>();
-
     foreach (var exp in experiments)
     {
         var verdict = exp.TryGetValue("verdict", out var v2) ? v2.ToString() ?? "" : "";
-        var tool = exp.TryGetValue("tool", out var t) ? t.ToString() ?? "" : "";
 
         if (byVerdict.ContainsKey(verdict))
         {
             byVerdict[verdict]++;
         }
 
-        // Group experiments by tool name, with verdict counts for each tool
-        if (!byTool.ContainsKey(tool))
-        {
-            byTool[tool] = new Dictionary<string, int>();
-            foreach (var vv in verdicts) byTool[tool][vv] = 0;
-        }
-        if (byTool[tool].ContainsKey(verdict))
-        {
-            byTool[tool][verdict]++;
-        }
+        // TODO: Add by_tool grouping — Lab 2
+        // Add a byTool dictionary that groups verdict counts per tool.
+        // The frontend expects: { "<tool name>": { "Faster": 0, "Same": 0, ... } }
     }
 
     return Results.Ok(new
     {
         total = experiments.Count,
         by_verdict = byVerdict,
-        by_tool = byTool,
     });
 });
 

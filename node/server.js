@@ -74,26 +74,20 @@ app.get("/summary", (req, res) => {
   const experiments = readExperiments();
 
   const byVerdict = { Faster: 0, Same: 0, Slower: 0, Surprising: 0 };
-  const byTool = {};
 
   for (const exp of experiments) {
     if (exp.verdict in byVerdict) {
       byVerdict[exp.verdict]++;
     }
 
-    // Group experiments by tool name, with verdict counts for each tool
-    if (!byTool[exp.tool]) {
-      byTool[exp.tool] = { Faster: 0, Same: 0, Slower: 0, Surprising: 0 };
-    }
-    if (exp.verdict in byTool[exp.tool]) {
-      byTool[exp.tool][exp.verdict]++;
-    }
+    // TODO: Add by_tool grouping — Lab 2
+    // Add a byTool object that groups verdict counts per tool.
+    // The frontend expects: { "<tool name>": { "Faster": 0, "Same": 0, ... } }
   }
 
   res.json({
     total: experiments.length,
     by_verdict: byVerdict,
-    by_tool: byTool,
   });
 });
 
